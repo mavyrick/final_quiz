@@ -28,7 +28,7 @@
 <h4>Previous Bids</h4>
 
 <% @auction.bids.each do |bid| %>
-  <p>$<%= bid.bid_amount %> at <%= bid.created_at %> by <%= bid.@users.full_name %></p>
+  <p>$<%= bid.bid_amount %> at <%= bid.created_at %> by <%= bid.user.full_name %></p>
   <hr>
 
 <% end %>
