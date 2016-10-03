@@ -4,13 +4,31 @@
 
 <p>Ends on: <%= @auction.ends_on %></p>
 
+<p>Current price: <%= @last_bid.bid_amount %></p>
+<p>Reserve price: <%= @auction.reserve_price %></p>
+
+<% if @last_bid.bid_amount >= @auction.reserve_price %>
+  <p>Reserve Price Met</p>
+<% else %>
+  <p>Reserve Price Not Met</p>
+<% end %>
+
+<%# if cannot? :edit, @bid %>
 <%= @bid.errors.full_messages.join(", ") %>
-<%= form_for [@auctoin, @bid] do |f| %>
+<%= form_for [@auction, @bid] do |f| %>
 <div>
   <%= f.label :bid_amount %>
   <%= f.number_field :bid_amount %>
 </div>
 
 <%= f.submit %>
+<% end %>
+<%# end %>
+
+<h4>Previous Bids</h4>
+
+<% @auction.bids.each do |bid| %>
+  <p>$<%= bid.bid_amount %> at <%= bid.created_at %> by <%= bid.@users.full_name %></p>
+  <hr>
 
 <% end %>
