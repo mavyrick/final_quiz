@@ -1,5 +1,7 @@
 class AuctionsController < ApplicationController
 
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @auction = Auction.order(created_at: :desc)
   end
@@ -29,6 +31,7 @@ class AuctionsController < ApplicationController
 
   def show
     @auction = Auction.find params[:id]
+    @bid = Auction.new
   end
 
 end

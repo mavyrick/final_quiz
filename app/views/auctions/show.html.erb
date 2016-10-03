@@ -3,3 +3,14 @@
 <p><%= @auction.details %></p>
 
 <p>Ends on: <%= @auction.ends_on %></p>
+
+<%= @bid.errors.full_messages.join(", ") %>
+<%= form_for [@auctoin, @bid] do |f| %>
+<div>
+  <%= f.label :bid_amount %>
+  <%= f.number_field :bid_amount %>
+</div>
+
+<%= f.submit %>
+
+<% end %>
