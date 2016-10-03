@@ -1,14 +1,14 @@
 class BidsController < ApplicationController
 
   def create
-    @auction          = Auction.find params[:post_id]
-    comment_params = params.require(:comment).permit(:body)
-    @comment       = Comment.new comment_params
-    @comment.post  = @post
-    if @comment.save
-      redirect_to post_path(@post), notice: "Comment created"
+    @auction          = Auction.find params[:auction_id]
+    comment_params = params.require(:bid).permit(:bid_amount)
+    @bid       = Comment.new comment_params
+    @bid.auction  = @auction
+    if @bid.save
+      redirect_to auction_path(@auction), notice: "Bid created"
     else
-      render "/posts/show"
+      render "/auctions/show"
     end
   end
 end
