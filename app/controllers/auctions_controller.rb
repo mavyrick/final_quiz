@@ -33,7 +33,6 @@ class AuctionsController < ApplicationController
     @auction = Auction.find params[:id]
     @bid = Bid.new
     @last_bid = Bid.last
-    @users = User.all
   end
 
 end
