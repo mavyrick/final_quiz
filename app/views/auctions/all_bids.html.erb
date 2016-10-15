@@ -1,0 +1,15 @@
+sdfsd
+<h1>All My Bids</h1>
+
+<br>
+
+<% @bids.each do |bid| %>
+
+ <%= bid.auction.title %>:
+$<%= bid.bid_amount %>
+
+<%#= bid.user.full_name %>
+<br>
+<br>
+
+<% end %>

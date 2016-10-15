@@ -12,4 +12,5 @@ class BidsController < ApplicationController
       render "/auctions/show"
     end
   end
+
 end

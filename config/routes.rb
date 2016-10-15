@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root "auctions#index"
 
+  get '/auctions/all_bids', to: 'auctions#all_bids', as: :all_bids
+
   resources :auctions do
     resources :bids
   end

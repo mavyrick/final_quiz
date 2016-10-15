@@ -13,7 +13,7 @@
   <p>Reserve Price Not Met</p>
 <% end %>
 
-<%# if cannot? :edit, @bid %>
+<%#if can? :view, @bid %>
 <%= @bid.errors.full_messages.join(", ") %>
 <%= form_for [@auction, @bid] do |f| %>
 <div>

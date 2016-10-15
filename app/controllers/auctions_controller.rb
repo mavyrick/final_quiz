@@ -35,4 +35,10 @@ class AuctionsController < ApplicationController
     @last_bid = Bid.last
   end
 
+  def all_bids
+    # @user = User.bids.order(created_at: :desc)
+    @bids = current_user.bids.order(created_at: :desc)
+  end
+
+
 end
