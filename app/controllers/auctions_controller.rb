@@ -33,12 +33,23 @@ class AuctionsController < ApplicationController
     @auction = Auction.find params[:id]
     @bid = Bid.new
     @last_bid = Bid.last
+    # if @auction.published? == false
+    # end
   end
 
-  def all_bids
+  def my_bids
     # @user = User.bids.order(created_at: :desc)
     @bids = current_user.bids.order(created_at: :desc)
   end
 
+  def my_auctions
+    # @user = User.bids.order(created_at: :desc)
+    @auctions = current_user.auctions.order(created_at: :desc)
+  end
+
+  def update
+    @auction = Auction.find params[:id]
+    @auction.publish!
+  end
 
 end

@@ -7,6 +7,12 @@
 <p>Current price: <%= @last_bid.bid_amount %></p>
 <p>Reserve price: <%= @auction.reserve_price %></p>
 
+<%#= button_to "Publish", action: @auction.publish%>
+
+<%= form_for(@auction, method: :put, data: { confirm: "Are you sure you want to publish?" }) do |f| %>
+  <%= f.submit "Publish", :controller => :auctions, :action => :publish %>
+<% end %>
+
 <% if @last_bid.bid_amount >= @auction.reserve_price %>
   <p>Reserve Price Met</p>
 <% else %>

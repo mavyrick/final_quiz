@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   root "auctions#index"
 
-  get '/auctions/all_bids', to: 'auctions#all_bids', as: :all_bids
+  get '/auctions/my_bids', to: 'auctions#my_bids', as: :my_bids
+  get '/auctions/my_auctions', to: 'auctions#my_auctions', as: :my_auctions
 
   resources :auctions do
     resources :bids
+    put :publish
   end
 
   resources :users, only: [:new, :create]
