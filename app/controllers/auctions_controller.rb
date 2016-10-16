@@ -3,7 +3,7 @@ class AuctionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @auction = Auction.order(created_at: :desc)
+    @auctions = Auction.order(created_at: :desc)
   end
 
   def new
@@ -44,7 +44,7 @@ class AuctionsController < ApplicationController
 
   def my_auctions
     # @user = User.bids.order(created_at: :desc)
-    @auctions = current_user.auctions.order(created_at: :desc)
+    @auctions = Auction.order(created_at: :desc)
   end
 
   def update

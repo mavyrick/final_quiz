@@ -1,5 +1,8 @@
-<h1>My Auctions</h1>
+<h1>Unpublished Auctions</h1>
 
 <% @auctions.each do |auction| %>
-  <%= auction.title %>
+  <% if auction.draft? == true %>
+    <%= link_to auction.title, auction_path(auction) %>
+    <hr>
+  <% end %>
 <% end %>

@@ -9,14 +9,13 @@
   </head>
 
   <body>
-    abcde
-    <%= link_to "All Auctions", auctions_path %>
+    <%= link_to "Published Auctions", auctions_path %>
+    <%= link_to "Unpublished Auctions", my_auctions_path %>
 
     <%= link_to "New Auction", new_auction_path %>
 
       <%= link_to "My Bids", my_bids_path %>
 
-      <%= link_to "My Auctions", my_auctions_path %>
 
     <% if user_signed_in? %>
       Welcome <%= current_user.first_name  %>,

@@ -1,6 +1,6 @@
-<h1>All Published Auctions</h1>
+<h1>Published Auctions</h1>
 
-<% @auction.each do |auction| %>
+<% @auctions.each do |auction| %>
   <% if auction.published? == true %>
     <%= link_to auction.title, auction_path(auction) %>
     <hr>
