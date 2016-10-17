@@ -9,6 +9,9 @@
   </head>
 
   <body>
+
+    <div id="wrapper">
+
     <%= link_to "Published Auctions", auctions_path %>
     <%= link_to "Unpublished Auctions", my_auctions_path %>
 
@@ -29,5 +32,7 @@
 <hr>
 
     <%= yield %>
+
+  </div>
   </body>
 </html>

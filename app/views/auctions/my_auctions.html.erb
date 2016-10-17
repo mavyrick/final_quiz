@@ -1,7 +1,7 @@
 <h1>Unpublished Auctions</h1>
 
 <% @auctions.each do |auction| %>
-  <% if auction.draft? == true %>
+  <% if auction.draft? == true || auction.cancelled? == true %>
     <%= link_to auction.title, auction_path(auction) %>
     <hr>
   <% end %>

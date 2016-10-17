@@ -23,9 +23,6 @@ class AuctionsController < ApplicationController
     end
   end
 
-  def destroy
-  end
-
   def edit
   end
 
@@ -50,6 +47,23 @@ class AuctionsController < ApplicationController
   def update
     @auction = Auction.find params[:id]
     @auction.publish!
+    redirect_to auction_path(@auction)
   end
+
+  # def update
+  #   service = Auctions::UpdateAuction.new
+  #   if service.call
+  #     redirect_to auction_path(service.auction), notice: "Auction published!"
+  #   else
+  #     @auction = service.auction
+  #     render :new
+  #   end
+  # end
+
+def destroy
+  @auction = Auction.find params[:id]
+  @auction.cancelled!
+  redirect_to auction_path(@auction)
+end
 
 end

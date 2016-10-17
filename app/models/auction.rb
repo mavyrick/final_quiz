@@ -18,6 +18,9 @@ aasm do
 
  event :reserve_met do
    transitions from: :reserve_not_met, to: :reserve_met
+   transitions from: :draft, to: :reserve_met
+   transitions from: :published, to: :reserve_met
+   transitions from: :reserve_met, to: :reserve_met
  end
 
  event :won do
@@ -26,9 +29,12 @@ aasm do
 
  event :cancelled do
    transitions from: :published, to: :cancelled
+   transitions from: :reserve__not_met, to: :cancelled
+   transitions from: :reserve_met, to: :cancelled
  end
 
  event :reserve_not_met do
+   transitions from: :draft, to: :reserve_not_met
    transitions from: :published, to: :reserve_not_met
  end
 

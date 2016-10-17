@@ -9,17 +9,32 @@
 
 <%#= button_to "Publish", action: @auction.publish%>
 
+<% if @auction.draft? == true %>
 <%= form_for(@auction, method: :put, data: { confirm: "Are you sure you want to publish?" }) do |f| %>
   <%= f.submit "Publish", :controller => :auctions, :action => :publish %>
 <% end %>
+<% end %>
 
-<% if @last_bid.bid_amount >= @auction.reserve_price %>
+<% if @auction.draft? != true && @auction.cancelled? != true %>
+<%= form_for(@auction, method: :delete, data: { confirm: "Are you sure you want to cancel?" }) do |f| %>
+  <%= f.submit "Cancel", :controller => :auctions, :action => :cancel %>
+<% end %>
+<% end %>
+
+
+<p>Auction State: <%= @auction.aasm_state %></p>
+
+<% if @last_bid.bid_amount.to_f >= @auction.reserve_price.to_f %>
   <p>Reserve Price Met</p>
 <% else %>
   <p>Reserve Price Not Met</p>
 <% end %>
 
 <%#if can? :view, @bid %>
+<%# if can? :create, @bid%>
+
+<%# if @auction.user != current_user %>
+
 <%= @bid.errors.full_messages.join(", ") %>
 <%= form_for [@auction, @bid] do |f| %>
 <div>
@@ -29,12 +44,14 @@
 
 <%= f.submit %>
 <% end %>
-<%# end %>
 
+<%# if can? :create, @bid %>
 <h4>Previous Bids</h4>
 
-<% @auction.bids.each do |bid| %>
-  <p>$<%= bid.bid_amount %> at <%= bid.created_at %> by <%= bid.user.first_name %></p>
-  <hr>
-
-<% end %>
+  <% @auction.bids.reverse_each do |bid| %>
+    <p>$<%= bid.bid_amount %> at <%= bid.created_at %> by <%= bid.user.first_name %></p>
+    <hr>
+    <% if @last_bid.bid_amount >= @auction.reserve_price && @auction.cancelled? != true  %>
+      <% @auction.reserve_met! == true %>
+    <% end %>
+  <% end %>
