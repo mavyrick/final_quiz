@@ -35,6 +35,8 @@
 
 <%# if @auction.user != current_user %>
 
+<% if @auction.draft? != true %>
+
 <%= @bid.errors.full_messages.join(", ") %>
 <%= form_for [@auction, @bid] do |f| %>
 <div>
@@ -54,4 +56,6 @@
     <% if @highest_bid.to_f >= @auction.reserve_price && @auction.cancelled? != true  %>
       <% @auction.reserve_met! == true %>
     <% end %>
+  <% end %>
+
   <% end %>
