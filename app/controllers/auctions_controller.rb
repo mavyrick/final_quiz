@@ -33,7 +33,6 @@ class AuctionsController < ApplicationController
     # @highest_bid = @auction.bids.last
     @highest_bid = @auction.bids.maximum("bid_amount")
     # if @auction.published? == false
-    # end
   end
 
   def my_bids

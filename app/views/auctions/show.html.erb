@@ -4,8 +4,8 @@
 
 <p>Ends on: <%= @auction.ends_on %></p>
 
-<p>Current price: <%= @highest_bid %></p>
-<p>Reserve price: <%= @auction.reserve_price %></p>
+<p>Current price: $<%= @highest_bid %></p>
+<p>Reserve price: $<%= @auction.reserve_price %></p>
 
 <%#= button_to "Publish", action: @auction.publish%>
 
@@ -24,7 +24,7 @@
 
 <p>Auction State: <%= @auction.aasm_state %></p>
 
-<% if @highest_bid >= @auction.reserve_price %>
+<% if @highest_bid.to_f >= @auction.reserve_price %>
   <p>Reserve Price Met</p>
 <% else %>
   <p>Reserve Price Not Met</p>
@@ -51,7 +51,7 @@
   <% @auction.bids.reverse_each do |bid| %>
     <p>$<%= bid.bid_amount %> at <%= bid.created_at %> by <%= bid.user.full_name %></p>
     <hr>
-    <% if @highest_bid >= @auction.reserve_price && @auction.cancelled? != true  %>
+    <% if @highest_bid.to_f >= @auction.reserve_price && @auction.cancelled? != true  %>
       <% @auction.reserve_met! == true %>
     <% end %>
   <% end %>
