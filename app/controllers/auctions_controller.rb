@@ -29,7 +29,9 @@ class AuctionsController < ApplicationController
   def show
     @auction = Auction.find params[:id]
     @bid = Bid.new
-    @last_bid = Bid.last
+    # @last_bid = Bid.last
+    # @highest_bid = @auction.bids.last
+    @highest_bid = @auction.bids.maximum("bid_amount")
     # if @auction.published? == false
     # end
   end
